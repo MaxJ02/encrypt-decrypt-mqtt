@@ -1,5 +1,6 @@
 import paho.mqtt.client as mqtt
 
+
 # Funktion för att dekryptera meddelanden med rot-n
 def decrypt_message(encrypted_message, shift):
     alphabet = "abcdefghijklmnopqrstuvwxyzåäö"
@@ -21,6 +22,7 @@ def decrypt_message(encrypted_message, shift):
 def on_connect(client, userdata, flags, rc):
     client.subscribe(f"ela/superchat/#", qos=1)
 
+
 def on_message(client, userdata, msg):
     try:
         payload = msg.payload.decode("utf-8")
@@ -35,6 +37,7 @@ def on_message(client, userdata, msg):
 
     except UnicodeDecodeError:
         print("Failed to decode message as UTF-8")
+
 
 client = mqtt.Client()
 client.on_connect = on_connect
