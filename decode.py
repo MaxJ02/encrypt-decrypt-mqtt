@@ -1,5 +1,6 @@
 import paho.mqtt.client as mqtt
 
+
 def decode_message(coded_message, shift):
     alphabet = "abcdefghijklmnopqrstuvwxyzåäö"
     decoded_message = ""
@@ -20,6 +21,7 @@ def decode_message(coded_message, shift):
 def on_connect(client, userdata, flags, rc):
     client.subscribe(f"ela/superchat/#", qos=1)
 
+
 def on_message(client, userdata, msg):
     try:
         payload = msg.payload.decode("utf-8")
@@ -31,6 +33,7 @@ def on_message(client, userdata, msg):
 
     except UnicodeDecodeError:
         print("Failed to decode message as UTF-8")
+
 
 client = mqtt.Client()
 client.on_connect = on_connect
